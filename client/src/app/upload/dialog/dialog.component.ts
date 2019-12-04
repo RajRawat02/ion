@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { UploadService } from '../upload.service';
 import { forkJoin } from 'rxjs';
-
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { Label } from 'ng2-charts';
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
@@ -14,15 +15,41 @@ export class DialogComponent implements OnInit {
   public files: Set<File> = new Set();
 
   constructor(public dialogRef: MatDialogRef<DialogComponent>, public uploadService: UploadService) { }
-
-  ngOnInit() { }
-
+  public mbarChartLabels:string[];
+  temparature=[];
+  temp=[];
+  ngOnInit() {
+    for(let i=0;i<366;i++){
+     this.temp.push('day '+1);
+    }
+    this.mbarChartLabels = this.temp;
+   }
+  public barChartOptions:any = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+  public barChartType:string = 'bar';
+  public barChartLegend:boolean = true;
+  public barChartColors:Array<any> = [
+    {
+      backgroundColor: 'rgba(105,159,177,0.2)',
+      borderColor: 'rgba(105,159,177,1)',
+      pointBackgroundColor: 'rgba(105,159,177,1)',
+      pointBorderColor: '#fafafa',
+      pointHoverBackgroundColor: '#fafafa',
+      pointHoverBorderColor: 'rgba(105,159,177)'
+    }
+  ];
+  public barChartData:any[] = [
+    {data: this.temparature, label: 'Thermometer'}
+  ];
   progress;
   canBeClosed = true;
   primaryButtonText = 'Upload';
   showCancelButton = true;
   uploading = false;
   uploadSuccessful = false;
+  isData = false;
   data:any=[];
   onFilesAdded() {
     const files: { [key: string]: File } = this.file.nativeElement.files;
@@ -93,6 +120,10 @@ export class DialogComponent implements OnInit {
     this.uploadService.getdata().subscribe((res)=>{
       console.log(" data "+res);
       this.data=res;
+      for(let i=0;i<this.data.length;i++){
+        this.temparature.push(this.data.val[i]);
+      }
+      this.isData=true;
     })
   }
 }
