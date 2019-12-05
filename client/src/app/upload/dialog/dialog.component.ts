@@ -91,7 +91,7 @@ export class DialogComponent implements OnInit {
 
   getdata(){
     this.uploadService.getdata().subscribe((res)=>{
-      console.log(" data "+res);
+      console.log(" data "+JSON.stringify(res));
       this.data=res;
     })
   }
