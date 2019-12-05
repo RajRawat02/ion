@@ -2,11 +2,11 @@ var mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 var postSchema = new Schema({
-  firstName:  {
-    type: String
+  ts:  {
+    type: Number
   },
-  lastName: {
-    type: String
+  val: {
+    type: Number
   }
 });
 
