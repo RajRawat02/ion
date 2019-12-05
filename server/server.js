@@ -32,7 +32,7 @@ const User = mongoose.model('User');
 app.get('/uploaddata',(req, res, next) => {
   //const { payload: { id } } = req;
 
-  return User.find().limit(100)
+  return User.find().limit(365)
     .then((user) => {
       if(!user) {
         return res.sendStatus(400);

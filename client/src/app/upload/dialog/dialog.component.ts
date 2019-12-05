@@ -4,6 +4,7 @@ import { UploadService } from '../upload.service';
 import { forkJoin } from 'rxjs';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { temp } from './temparature';
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
@@ -15,14 +16,15 @@ export class DialogComponent implements OnInit {
   public files: Set<File> = new Set();
 
   constructor(public dialogRef: MatDialogRef<DialogComponent>, public uploadService: UploadService) { }
-  public mbarChartLabels:string[];
-  temparature=[];
+  public barChartLabels;
+  temparature:temp[]=[];
   temp=[];
   ngOnInit() {
-    for(let i=0;i<366;i++){
-     this.temp.push('day '+1);
+    for(let i=1;i<365;i++){
+     this.temp.push('day '+i);
     }
-    this.mbarChartLabels = this.temp;
+    console.log("this temp",this.temp);
+    this.barChartLabels=this.temp;
    }
   public barChartOptions:any = {
     scaleShowVerticalLines: false,
@@ -115,14 +117,18 @@ export class DialogComponent implements OnInit {
   
   }
 
-
   getdata(){
     this.uploadService.getdata().subscribe((res)=>{
       console.log(" data "+JSON.stringify(res));
-      this.data=res;
-      for(let i=0;i<this.data.length;i++){
-        this.temparature.push(this.data.val[i]);
+      this.data=<temp>res;
+      console.log("typeOf ",this.data)
+      for(let i=0;i<this.data.length-1;i++){
+        this.temparature.push(this.data[i].val);
+        //this.temp.push(this.data[i].ts.toString());
       }
+      //console.log(" temparature ",this.temp);
+      console.log(" temparature data",this.temparature);
+      //this.mbarChartLabels = this.temp;
       this.isData=true;
     })
   }

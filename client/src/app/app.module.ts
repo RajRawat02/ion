@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { UploadModule } from './upload/upload.module';
-
+import 'chart.js'
 @NgModule({
   declarations: [
     AppComponent

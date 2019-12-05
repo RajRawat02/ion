@@ -7,9 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { UploadService } from './upload.service';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ChartsModule } from 'ng2-charts';
 @NgModule({
-  imports: [CommonModule, MatButtonModule, MatDialogModule, MatListModule, FlexLayoutModule, HttpClientModule, BrowserAnimationsModule, MatProgressBarModule],
+  imports: [CommonModule, MatButtonModule, MatDialogModule, MatListModule, ChartsModule,FlexLayoutModule, HttpClientModule, BrowserAnimationsModule, MatProgressBarModule],
   declarations: [UploadComponent, DialogComponent],
   exports: [UploadComponent],
   entryComponents: [DialogComponent], // Add the DialogComponent as entry component
