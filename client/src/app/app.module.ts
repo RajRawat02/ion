@@ -1,8 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
-import { UploadModule } from './upload/upload.module';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule, MatDialogModule, MatListModule, MatProgressBarModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpClientModule } from '@angular/common/http';
+import { ChartsModule } from 'ng2-charts';
+import { MatProgressSpinnerModule } from '@angular/material';
 import 'chart.js'
 @NgModule({
   declarations: [
@@ -10,7 +15,16 @@ import 'chart.js'
   ],
   imports: [
     BrowserModule,
-    UploadModule
+    CommonModule, 
+    MatButtonModule,
+    MatDialogModule, 
+    MatListModule,
+    ChartsModule,
+    FlexLayoutModule, 
+    HttpClientModule,
+    BrowserAnimationsModule, 
+    MatProgressBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

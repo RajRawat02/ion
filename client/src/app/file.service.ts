@@ -9,8 +9,10 @@ import { Subject, Observable } from 'rxjs';
 
 const url = 'http://localhost:3000/';
 
-@Injectable()
-export class UploadService {
+@Injectable({
+  providedIn: 'root'
+})
+export class FileService {
   constructor(private http: HttpClient) { }
 
   public upload(
