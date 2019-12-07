@@ -10,4 +10,4 @@ var postSchema = new Schema({
   }
 });
 
-mongoose.model('User', postSchema);
+mongoose.model('Temparature', postSchema);

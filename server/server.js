@@ -12,7 +12,7 @@ mongoose.connect('mongodb://localhost/file-upload');
 mongoose.set('debug', true);
 
 //Models & routes
-require('./models/User');
+require('./models/Temparature');
 //Configure our app
 app.use(cors());
 //app.use(require('morgan')('dev'));

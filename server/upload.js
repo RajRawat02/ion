@@ -2,8 +2,8 @@ const IncomingForm = require('formidable').IncomingForm;
 const fs = require('fs');
 const JSONStream = require('JSONStream');
 const mongoose = require('mongoose');
-require('./models/User');
-const User = mongoose.model('User');
+require('./models/Temparature');
+const Temparature = mongoose.model('Temparature');
 module.exports = function upload(req, res) {
   const form = new IncomingForm();
 
@@ -13,22 +13,11 @@ module.exports = function upload(req, res) {
     // you can access it using file.path
     console.log('file', file.name);
     const readStream = fs.createReadStream(file.path);
-    readStream.pipe(JSONStream.parse('*')).on('data', async (userData) => {
-      //arrayOfUsers.push(userData);
-      //if (arrayOfUsers.length === 1000000) {
+    readStream.pipe(JSONStream.parse('*')).on('data', async (temparatureData) => {
         readStream.pause();
-        await User.create(userData);
-        //arrayOfUsers = [];
-        //process.stdout.write('.');
+        await Temparature.create(temparatureData);
         readStream.resume();
-     // }
     });
-    // readStream.on('end', async () => {
-    //   //await User.create(arrayOfUsers); // left over data
-    //   console.log('\nImport complete, closing connection...');
-    //   //db.close();
-    //   process.exit(0);
-    // });
   });
   form.on('end', () => {
     res.json();
