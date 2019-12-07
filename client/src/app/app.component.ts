@@ -22,7 +22,7 @@ export class AppComponent {
   temp=[];
   showProgress = false;
   ngOnInit() {
-    for(let i=1;i<365;i++){
+    for(let i=1;i<366;i++){
      this.temp.push('day '+i);
     }
     console.log("this temp",this.temp);
@@ -48,7 +48,7 @@ export class AppComponent {
     {data: this.temparature, label: 'Thermometer'}
   ];
   progress;
-  canBeClosed = true;
+  canBeClosed = false;
   primaryButtonText = 'Upload';
   showCancelButton = true;
   uploading = false;
@@ -62,6 +62,7 @@ export class AppComponent {
         this.files.add(files[key]);
       }
     }
+    this.canBeClosed = true;
   }
 
   addFiles() {
@@ -115,8 +116,6 @@ export class AppComponent {
       this.uploading = false;
       this.getdata();
     });
-    
-  
   }
 
   getdata(){
@@ -124,14 +123,11 @@ export class AppComponent {
       console.log(" data "+JSON.stringify(res));
       this.data=<temp>res;
       console.log("typeOf ",this.data)
-      for(let i=0;i<this.data.length-1;i++){
+      for(let i=0;i<this.data.length;i++){
         this.temparature.push(this.data[i].val);
         this.showProgress = false;
-        //this.temp.push(this.data[i].ts.toString());
       }
-      //console.log(" temparature ",this.temp);
       console.log(" temparature data",this.temparature);
-      //this.mbarChartLabels = this.temp;
       this.isData=true;
     })
   }
