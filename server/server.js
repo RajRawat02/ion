@@ -28,17 +28,17 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 app.post('/upload', upload);
-const User = mongoose.model('User');
+const Temparature = mongoose.model('Temparature');
 app.get('/uploaddata',(req, res, next) => {
   //const { payload: { id } } = req;
 
-  return User.find().limit(365)
-    .then((user) => {
-      if(!user) {
+  return Temparature.find().limit(365)
+    .then((temparature) => {
+      if(!temparature) {
         return res.sendStatus(400);
       }
 
-      return res.send(user);
+      return res.send(temparature);
     });
 });
 
